@@ -1,13 +1,14 @@
 /**
  * Configuration for two Metabase instances
- * Replace these values with your actual Metabase instance URLs, API keys, and dashboard IDs
+ * Uses JWT authentication via backend server
+ * Environment variables are loaded from .env file
  */
 
 export const METABASE_INSTANCES = {
   instance1: {
     name: "Metabase Instance 1",
-    metabaseInstanceUrl: "YOUR_METABASE_URL", // e.g., "http://localhost:3000"
-    apiKey: "YOUR_API_KEY", // Get from Metabase: Settings → Authentication → API keys
+    metabaseInstanceUrl: import.meta.env.VITE_METABASE_URL_1,
+    authEndpoint: import.meta.env.VITE_AUTH_ENDPOINT_1,
     dashboardId: 1,
     color: "#509EE3",
     withTitle: true,
@@ -21,8 +22,8 @@ export const METABASE_INSTANCES = {
 
   instance2: {
     name: "Metabase Instance 2",
-    metabaseInstanceUrl: "YOUR_METABASE_URL", // e.g., "http://localhost:3000"
-    apiKey: "YOUR_API_KEY", // Get from Metabase: Settings → Authentication → API keys
+    metabaseInstanceUrl: import.meta.env.VITE_METABASE_URL_2,
+    authEndpoint: import.meta.env.VITE_AUTH_ENDPOINT_2,
     dashboardId: 1,
     color: "#88BF4D",
     withTitle: true,

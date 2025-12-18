@@ -15,12 +15,18 @@ function IframeInstance() {
     }
   }, []);
 
-  const authConfig = useMemo(() =>
-    config ? {
+  const authConfig = useMemo(() => {
+    if (!config) return null;
+
+    return {
       metabaseInstanceUrl: config.metabaseInstanceUrl,
-      apiKey: config.apiKey,
-    } : null
-  , [config]);
+      fetchRequestToken: async () => {
+        const url = `${config.authEndpoint}?dashboardId=${config.dashboardId}`;
+        const response = await fetch(url);
+        return await response.json();
+      },
+    };
+  }, [config]);
 
   if (!config || !authConfig) return null;
 
